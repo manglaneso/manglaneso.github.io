@@ -4,6 +4,10 @@ title:  "G Birthdays Reminders"
 home: true
 ---
 
+{:refdef: style="text-align: center;"}
+![image](/assets/images/cupcake.png)
+{: refdef}
+
 This is a small G Suite Add-on for all the people, like me, who likes to keep track of the birthdays of their friends using Google Contacts.
 
 ### Why?
