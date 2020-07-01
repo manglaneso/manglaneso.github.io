@@ -4,7 +4,7 @@ title:  "G Birthdays Reminders"
 home: true
 ---
 
-{:refdef: style="text-align: center;"}
+{:refdef: style="text-align: center; "}
 ![image](/assets/images/cupcake.png)
 {: refdef}
 
