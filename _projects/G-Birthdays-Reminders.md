@@ -18,7 +18,7 @@ That is where this Add-on can help you. Just switch on the service and start get
 
 ### Links
 
-Find the Add-on on the [G Suite Marketplace]()
+Find the Add-on on the ~~[G Suite Marketplace]()~~ Pending Google Review.
 
 Find the source code on [Github](https://github.com/manglaneso/G-Birthdays-Reminders)
 
