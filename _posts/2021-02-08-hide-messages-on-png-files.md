@@ -9,8 +9,8 @@ So, recently one friend sent me a [hackthebox](https://www.hackthebox.eu/) style
 The challenged consisted on some [steganography](https://en.wikipedia.org/wiki/Steganography) challenges in which I had
 to manage to get some information from an image file.
 
-In one of those challenges I had access some data hidden using a technique called LSB (Least Significant Bit) Based 
-Steganography. This technique consists on modifying the least significant bit of every byte of every pixel on an image,
+In one of those challenges I had access some data hidden using a technique called **LSB (Least Significant Bit) Based 
+Steganography**. This technique consists on modifying the least significant bit of every byte of every pixel on an image,
 which is the bit which adds the least information to the byte, and encode each bit of your message there. This way, the
 change on the image is imperceptible to the human eye, being the modified image almost completely equal to the original
 file.
@@ -31,7 +31,7 @@ Red, Green and Blue channel:
 
 ![png_bytes_grid](/assets/images/hide-messages-on-png-files/png_bytes_grid.png) 
  
-Each pixel represents the color RGB(255, 149, 11), or #ff950b in hexadecimal, which looks like the following image:
+Each pixel represents the color **RGB(255, 149, 11)**, or **#ff950b** in hexadecimal, which looks like the following image:
 
 ![original_pixel_color](/assets/images/hide-messages-on-png-files/original_pixel_color.png) 
 
@@ -46,9 +46,9 @@ After we modify them, we get:
 ![bits_modified_on_image](/assets/images/hide-messages-on-png-files/png_bits_modified.png) 
 
 We ended up with our message hidden inside an image! But wait, we altered the original image doing it! Remember how
-every pixel in our original image represented the color RGB(255, 149, 11)? Well, we changed some of the first 8 bytes of
-the red channel from 11111111 (255) to 11111110 (254), so now some pixels will represent the color RGB(254, 149, 11) 
-instead of the original RGB(255, 149, 11)! Let's see how does this new color look like:
+every pixel in our original image represented the color **RGB(255, 149, 11)**? Well, we changed some of the first 8 bytes of
+the red channel from **11111111 (255)** to **11111110 (254)**, so now some pixels will represent the color 
+**RGB(254, 149, 11)** instead of the original RGB(255, 149, 11)! Let's see how does this new color look like:
 
 ![modified_pixel_color](/assets/images/hide-messages-on-png-files/modified_pixel_color.png) 
 
