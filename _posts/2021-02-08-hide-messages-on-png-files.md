@@ -5,9 +5,6 @@ categories: steg steganography python LSB github
 tags: steg steganography python LSB github
 ---
 
-
-# Hide messages on PNG files!
-
 So, recently one friend sent me a [hackthebox](https://www.hackthebox.eu/) style challenge he designed.
 The challenged consisted on some [steganography](https://en.wikipedia.org/wiki/Steganography) challenges in which I had
 to manage to get some information from an image file.
