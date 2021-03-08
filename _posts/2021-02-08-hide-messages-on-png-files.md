@@ -6,12 +6,12 @@ tags: steg steganography python LSB github
 ---
 
 So, recently one friend sent me a [hackthebox](https://www.hackthebox.eu/) style challenge he designed.
-The challenged consisted on some [steganography](https://en.wikipedia.org/wiki/Steganography) challenges in which I had
+It consisted on some [steganography](https://en.wikipedia.org/wiki/Steganography) problems in which I had
 to manage to get some information from an image file.
 
-In one of those challenges I had access some data hidden using a technique called **LSB (Least Significant Bit) Based 
-Steganography**. This technique consists on modifying the least significant bit of every byte of every pixel on an image,
-which is the bit which adds the least information to the byte, and encode each bit of your message there. This way, the
+In one of those challenges I had to access some data hidden using a technique called **LSB (Least Significant Bit) Based 
+Steganography**. This technique consists on the modification of the least significant bit of every byte of every pixel on an image.
+This bit is the one adding the least information to the byte. This is where we will encode each bit of our message. This way, the
 change on the image is imperceptible to the human eye, being the modified image almost completely equal to the original
 file.
 
