@@ -1,0 +1,27 @@
+baseURL = 'https://manglaneso.me/'
+languageCode = 'en-us'
+title = 'manglaneso.me'
+
+theme = 'mango'
+
+[[menus.main]]
+  name = 'manglaneso.me'
+  pageRef = '/'
+  weight = 10
+    [menus.main.params]
+      title = true
+
+[[menus.main]]
+  name = 'blog'
+  pageRef = '/blog'
+  weight = 20
+
+[[menus.main]]
+  name = 'projects'
+  pageRef = '/projects'
+  weight = 30
+
+[[menus.main]]
+  name = 'links'
+  pageRef = '/links'
+  weight = 40
