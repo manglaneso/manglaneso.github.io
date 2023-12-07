@@ -5,9 +5,53 @@
 	<description>Recent content on manglaneso.me</description>
 	<generator>Hugo -- gohugo.io</generator>
 	<language>en-us</language>
+	<lastBuildDate>Thu, 07 Dec 2023 17:30:26 +0100</lastBuildDate>
     
         <atom:link href="https://manglaneso.me/projects/index.xml" rel="self" type="application/rss+xml" />
 	
+	
+	<item>
+		<title>mango</title>
+		<link>https://manglaneso.me/projects/mango/</link>
+		<pubDate>Thu, 07 Dec 2023 17:30:26 +0100</pubDate>
+		
+		<guid>https://manglaneso.me/projects/mango/</guid>
+		<description>&lt;p&gt;My own simple Hugo theme. Used in this site.&lt;/p&gt;
+&lt;h3 id=&#34;links&#34;&gt;Links&lt;/h3&gt;
+&lt;p&gt;Find the source code on &lt;a href=&#34;https://github.com/manglaneso/mango&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>New Site!</title>
+		<link>https://manglaneso.me/blog/new-site/</link>
+		<pubDate>Thu, 07 Dec 2023 13:43:32 +0100</pubDate>
+		
+		<guid>https://manglaneso.me/blog/new-site/</guid>
+		<description>&lt;p&gt;So, tldr, I changed this site.&lt;/p&gt;
+&lt;p&gt;The old site was basically a &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; site using the &lt;a href=&#34;https://github.com/jekyll/minima&#34;&gt;Minima theme&lt;/a&gt; which works great. The thing is that recently I came across &lt;a href=&#34;https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/&#34;&gt;this blog post&lt;/a&gt; by Nathaniel where he disserts about how websites should be under 14kb in size and&amp;hellip; I realized he was completely right!&lt;/p&gt;
+&lt;p&gt;I always disliked how websites nowadays are absolutely huge even for simple websites like, for example, &lt;a href=&#34;https://google.com/&#34;&gt;Google&amp;rsquo;s homepage&lt;/a&gt;, which have barely a couple of elements and almost no content, downloads several MBs of data. This is the result of heavy use of Javascript files, web telemetry and analytics, weird fonts and some more crap, which works great with high speed connections, which are widely available, but not always! So I decided that my website should be as simple as possible.&lt;/p&gt;
+&lt;p&gt;Right now, the homepage of this website should download around 4.4 KBs of data to your device, while the old version of my website would have downloaded around 35.6 KBs. This should translate on most visits to my website being able to download almost every page of my website in one TCP packet each, which should increase the performance.&lt;/p&gt;
+&lt;p&gt;Another advantage of reducing network usage is to reduce the carbon footprint of webpages, which in this case is insignificant since my website does not have that big amount of network traffic, but still, is pretty nice.&lt;/p&gt;
+&lt;h2 id=&#34;how-to&#34;&gt;How to&lt;/h2&gt;
+&lt;p&gt;So, in order to do this I started playing around with &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, which is a tool to build static webpages in a similar fashion as Jekyll. I tried looking at &lt;a href=&#34;https://themes.gohugo.io/&#34;&gt;themes.gohugo.io&lt;/a&gt; for minimal themes, but all of them had some heavy Javascript or CSS frameworks so&amp;hellip; I decided to create my &lt;a href=&#34;https://github.com/manglaneso/mango&#34;&gt;own theme&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;This theme has no Javascript, barely 160 lines of CSS and makes the website look with a cool 90s retro look! And also does the job okay, so if you feel like you could use it, install instructions are in the README :).&lt;/p&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>themdb_bot</title>
+		<link>https://manglaneso.me/projects/themdb_bot/</link>
+		<pubDate>Mon, 08 Mar 2021 16:35:15 +0100</pubDate>
+		
+		<guid>https://manglaneso.me/projects/themdb_bot/</guid>
+		<description>&lt;p&gt;&lt;img src=&#34;images/themdb_bot_demo.gif&#34; alt=&#34;themdb_bot demo gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://t.me/imdb&#34;&gt;IMDB Telegram bot&lt;/a&gt; clone using &lt;a href=&#34;https://themoviedb.org&#34;&gt;TMDB&lt;/a&gt; to get info about movies and TV shows.&lt;/p&gt;
+&lt;p&gt;Just write @themdb_bot in any Telegram chat and start using it! Yoy can also talk to it clicking on the &lt;a href=&#34;https://t.me/themdb_bot&#34;&gt;following link&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;links&#34;&gt;Links&lt;/h3&gt;
+&lt;p&gt;Find the source code on &lt;a href=&#34;https://github.com/manglaneso/tmdb_bot&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+</description>
+	</item>
 	
 	<item>
 		<title>Hide messages on PNG files!</title>
@@ -32,7 +76,6 @@ file.&lt;/p&gt;
 &lt;h2 id=&#34;some-boring-theory&#34;&gt;Some boring theory&lt;/h2&gt;
 &lt;p&gt;Let&amp;rsquo;s take a small PNG image file:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;images/png_file.png&#34; alt=&#34;png_file&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;images/a.jpg&#34; alt=&#34;a&#34;&gt;&lt;/p&gt;
 &lt;p&gt;This image consists of a grid of 5x5 pixels. Each pixel consists of 3 bytes, each representing the value of the
 Red, Green and Blue channel:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;images/png_bytes_grid.png&#34; alt=&#34;png_bytes_grid&#34;&gt;&lt;/p&gt;
@@ -184,6 +227,19 @@ it, we can see the following message through the terminal:&lt;/p&gt;
 &lt;p&gt;If you got this far, thanks for reading! I hope you learn something today.&lt;/p&gt;
 &lt;p&gt;Also, if you want easy access to the code, with the example image and the LICENSE and all that stuff, check the
 &lt;a href=&#34;https://github.com/manglaneso/LSB-encode-decode&#34;&gt;repo on Github!&lt;/a&gt;.&lt;/p&gt;
+</description>
+	</item>
+	
+	<item>
+		<title>elbichobot</title>
+		<link>https://manglaneso.me/projects/elbichobot/</link>
+		<pubDate>Wed, 01 Jul 2020 16:30:26 +0100</pubDate>
+		
+		<guid>https://manglaneso.me/projects/elbichobot/</guid>
+		<description>&lt;p&gt;Small Telegram bot with different useful functionalities.&lt;/p&gt;
+&lt;p&gt;You can talk to it through the &lt;a href=&#34;https://t.me/elbichobot&#34;&gt;following link&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;links&#34;&gt;Links&lt;/h3&gt;
+&lt;p&gt;Find the source code on &lt;a href=&#34;https://github.com/manglaneso/elbichobot&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
 </description>
 	</item>
 	
