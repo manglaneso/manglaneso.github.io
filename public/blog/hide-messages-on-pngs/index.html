@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Hide messages on PNG files! | manglaneso.me</title>
+
+      <link rel="stylesheet" href="/css/main.min.54b59595d9b29e87684a42bfd475767aecb5a560727a016bbf4299b462c4ec7e.css" integrity="sha256-VLWVldmynodoSkK/1HV2euy1pWByegFrv0KZtGLE7H4=" crossorigin="anonymous">
+
+
+
+
+</head>
+<body>
+  <header>
+    
+  <nav class="navigation">
+    <ul>
+    
+    <li>
+      <a class="title" href="/">manglaneso.me</a>
+    </li>
+    
+    <li>
+      <a aria-current="true" class="ancestor" href="/blog/">blog</a>
+    </li>
+    
+    <li>
+      <a href="/projects/">projects</a>
+    </li>
+    
+    <li>
+      <a href="/links/">links</a>
+    </li>
+    <li>
+      <a href="/index.xml">RSS</a>
+    </li>
+    </ul>
+  </nav>
+
+
+  </header>
+  <main>
+    
+  <h1>Hide messages on PNG files!</h1>
+    
+    
+    <time datetime="2021-02-08T23:30:26&#43;01:00" class="date-size">February 8, 2021</time>
+  <p>So, recently one friend sent me a <a href="https://www.hackthebox.eu/">hackthebox</a> style challenge he designed.
+It consisted on some <a href="https://en.wikipedia.org/wiki/Steganography">steganography</a> problems in which I had
+to manage to get some information from an image file.</p>
+<p>In one of those challenges I had to access some data hidden using a technique called <strong>LSB (Least Significant Bit) Based
+Steganography</strong>. This technique consists on the modification of the least significant bit of every byte of every pixel on an image.
+This bit is the one adding the least information to the byte. This is where we will encode each bit of our message. This way, the
+change on the image is imperceptible to the human eye, being the modified image almost completely equal to the original
+file.</p>
+<p>Interesting, right? If you want to learn more about it, just continue reading.</p>
+<p>To understand this concept lets see a simplified example.</p>
+<blockquote>
+<p>tl;dr: If you just need some code to hide text in PNG images and to read it from them, just check this
+<a href="https://github.com/manglaneso/LSB-encode-decode">repo on Github</a>.</p>
+</blockquote>
+<h2 id="some-boring-theory">Some boring theory</h2>
+<p>Let&rsquo;s take a small PNG image file:</p>
+<p><img src="images/png_file.png" alt="png_file"></p>
+<p><img src="images/a.jpg" alt="a"></p>
+<p>This image consists of a grid of 5x5 pixels. Each pixel consists of 3 bytes, each representing the value of the
+Red, Green and Blue channel:</p>
+<p><img src="images/png_bytes_grid.png" alt="png_bytes_grid"></p>
+<p>Each pixel represents the color <strong>RGB(255, 149, 11)</strong>, or <strong>#ff950b</strong> in hexadecimal, which looks like the following image:</p>
+<p><img src="images/original_pixel_color.png" alt="original_pixel_color"></p>
+<p>So, imagine we want to hide a message in this file. To keep it simple, let&rsquo;s try to hide the letter <strong>&lsquo;a&rsquo;</strong>,
+represented by the binary number <strong>01100001</strong> in ASCII encoding. How can we do it without anyone noticing? With the
+LSB technique we&rsquo;ll modify the least significant bit of the first 8 bytes of the red channel of the image:</p>
+<p><img src="images/png_selected_bits_to_modify.png" alt="bits_to_modify_on_image"></p>
+<p>After we modify them, we get:</p>
+<p><img src="images/png_bits_modified.png" alt="bits_modified_on_image"></p>
+<p>We ended up with our message hidden inside an image! But wait, we altered the original image doing it! Remember how
+every pixel in our original image represented the color <strong>RGB(255, 149, 11)</strong>? Well, we changed some of the first 8 bytes of
+the red channel from <strong>11111111 (255)</strong> to <strong>11111110 (254)</strong>, so now some pixels will represent the color
+<strong>RGB(254, 149, 11)</strong> instead of the original RGB(255, 149, 11)! Let&rsquo;s see how does this new color look like:</p>
+<p><img src="images/modified_pixel_color.png" alt="modified_pixel_color"></p>
+<p>Can you spot any difference?</p>
+<p><img src="images/color_comparison.png" alt="color_comparison"></p>
+<h2 id="real-world-example">Real world example</h2>
+<p>So, now we know how all this works, let&rsquo;s see a real world example with a real size image. I&rsquo;ve put together two simple
+Python scripts, one to hide ASCII messages in PNG files following the previously explained method, and another one to
+unhide them:</p>
+<p>decode_image.py:</p>
+<pre tabindex="0"><code>from PIL import Image
+
+decode_map = {f&#39;{i:08b}&#39;: chr(i) for i in range(0, 128)}
+
+# EOT (End of text) character
+end_of_text_char = &#39;00000011&#39;
+
+extracted_bin = []
+
+with Image.open(&#34;encoded_image.png&#34;) as img:
+    width, height = img.size
+    for x in range(0, width):
+        for y in range(0, height):
+            pixel = list(img.getpixel((x, y)))
+
+            extracted_bin.append(pixel[0] &amp; 1)
+            # Uncomment to read the 3 bytes in every pixel.
+            # for n in range(0, 3):
+            #    extracted_bin.append(pixel[n]&amp;1)
+
+    decoded_bytes = []
+
+    count = 0
+
+    to_save = []
+
+    to_save_string = &#39;&#39;
+
+    for bit in extracted_bin:
+
+        if count % 8 == 0 and count != 0:
+            byte_string = &#34;&#34;.join(to_save)
+
+            # Check if EOT character found
+            if byte_string == end_of_text_char:
+                break
+
+            # Check if character is the ASCII table
+            try:
+                to_save_string += decode_map[byte_string]
+            except KeyError:
+                pass
+
+            decoded_bytes.append(&#34;&#34;.join(to_save))
+            to_save = []
+
+        to_save.append(str(bit))
+        count += 1
+
+    # Print the result
+    print(decoded_bytes)
+    print(to_save_string)
+</code></pre><p>encode_image.py:</p>
+<pre tabindex="0"><code>from PIL import Image
+
+# Message to hide. Ended with the EOT (End of text) character.
+message_to_hide = &#39;It is a period of civil war. Rebel spaceships, striking from a hidden base, have won \
+their first victory against the evil Galactic Empire. During the battle, Rebel spies managed to steal secret \
+plans to the Empire\&#39;s ultimate weapon, the DEATH STAR, an armored space station with enough power to \
+destroy an entire planet. Pursued by the Empire\&#39;s sinister agents, Princess Leia races home aboard her \
+starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy.\x03&#39;
+
+encode_map = {chr(i): f&#39;{i:08b}&#39; for i in range(0, 128)}
+
+print(f&#39;Message to hide: \n{message_to_hide}&#39;.format(message_to_hide=message_to_hide))
+
+with Image.open(&#34;Rebel_Alliance_flag.png&#34;) as img:
+    width, height = img.size
+
+    available_storage = (width * height) / 8
+    message_size = len(message_to_hide) * 8
+
+    if message_size &gt; available_storage:
+        print(&#39;You are trying to store {message_size} bytes in {available_storage} bytes&#39;.format(
+            message_size=message_size, available_storage=available_storage))
+        exit()
+
+    height_count = 0
+    width_count = 0
+
+    encoded_bytes = []
+
+    for char in message_to_hide:
+
+        encoded_char = encode_map[char]
+        encoded_bytes.append(encoded_char)
+
+        for bits in encoded_char:
+
+            for bit in bits:
+                if height_count == height:
+                    width_count += 1
+                    height_count = 0
+
+                pixel = list(img.getpixel((width_count, height_count)))
+
+                # Encode the message just in the Red channel
+                pixel[0] = pixel[0] &amp; ~1 | int(bit)
+
+                # Uncomment to encode the message in the three channels
+                # for n in range(0, 3):
+                #     pixel[n] = pixel[n] &amp; ~1 | int(bit)
+
+                img.putpixel((width_count, height_count), tuple(pixel))
+
+                height_count += 1
+
+    print(encoded_bytes)
+
+    # Save modified image
+    img.save(&#34;encoded_image.png&#34;)
+</code></pre><p>Using the encoding script we will try and hide the <strong>Star Wars Episode IV: A New Hope</strong> film crawl inside the following
+220x174 pixels Rebel Alliance flag:</p>
+<p><img src="images/Rebel_Alliance_flag.png" alt="original_rebel_alliance_flag"></p>
+<p>After running the <strong>encode_file.py</strong>, we can see the following output through the terminal, where we find the message
+to hide in plain text, and represented as a list of ASCII encoded bytes:</p>
+<p><img src="images/encode_file_py_output.png" alt="encode_file_py_output"></p>
+<p>Finally we end up with the following image:</p>
+<p><img src="images/encoded_image.png" alt="modified_rebel_alliance_flag"></p>
+<p>Can you see any difference with the original? (You can download it yourself and try to decode it!)</p>
+<p>Okay, so now, let&rsquo;s see if the message is really there (and if our <strong>decode_file.py</strong> works properly). If we run
+it, we can see the following message through the terminal:</p>
+<p><img src="images/decode_file_py_output.png" alt="decode_file_py_output"></p>
+<p>We can see the same list of ASCII encoded bytes and the <strong>Star Wars Episode IV: A New Hope</strong> film crawl! Yay it works!</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>If you got this far, thanks for reading! I hope you learn something today.</p>
+<p>Also, if you want easy access to the code, with the example image and the LICENSE and all that stuff, check the
+<a href="https://github.com/manglaneso/LSB-encode-decode">repo on Github!</a>.</p>
+
+
+  
+  <br>
+    Tags:
+    <ul class="tags">
+        <div><li class="tag"><a href="https://manglaneso.me/tags/steg/">steg</a></li>
+          <li class="tag"><a href="https://manglaneso.me/tags/steganography/">steganography</a></li>
+          <li class="tag"><a href="https://manglaneso.me/tags/python/">python</a></li>
+          <li class="tag"><a href="https://manglaneso.me/tags/lsb/">LSB</a></li>
+          <li class="tag"><a href="https://manglaneso.me/tags/github/">github</a></li>
+          </div>
+    </ul>
+
+  </main>
+  <footer>
+    <p>
+  ©2021 Andrés Manglano. All content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+  <br>
+  Last generated on 2023-09-24T15:20:17Z.
+</p>
+
+  </footer>
+</body>
+</html>
