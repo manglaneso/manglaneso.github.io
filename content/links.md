@@ -7,7 +7,7 @@ I guess since I have a personal webpage I do not need to pay for a Linktr.ee acc
 
 - [Github](https://github.com/manglaneso)
 - [Linkedin](https://www.linkedin.com/in/amanglano/)
-- [Mastodon](https://illegible.club/@manglaneso "{rel='me'}")
+<a rel="me" href="https://illegible.club/@manglaneso">Mastodon</a>
 - [Twitter](https://twitter.com/manglaneso)
 - [Bluesky](https://bsky.app/profile/manglaneso.bsky.social)
 
