@@ -7,8 +7,8 @@ I guess since I have a personal webpage I do not need to pay for a Linktr.ee acc
 
 - [Github](https://github.com/manglaneso)
 - [Linkedin](https://www.linkedin.com/in/amanglano/)
+- [Mastodon](https://illegible.club/@manglaneso)
 - [Twitter](https://twitter.com/manglaneso)
-- [Mastodon](https://mastodon.social/@manglaneso)
 - [Bluesky](https://bsky.app/profile/manglaneso.bsky.social)
 
 Also, if you want you can contact me through [email](mailto:andresmanglano@pm.me).
