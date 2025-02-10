@@ -11,4 +11,4 @@ I guess since I have a personal webpage I do not need to pay for a Linktr.ee acc
 - [Twitter](https://twitter.com/manglaneso)
 - [Bluesky](https://bsky.app/profile/manglaneso.bsky.social)
 
-Also, if you want you can contact me through [email](mailto:andresmanglano@pm.me).categories/index.xml
+Also, if you want you can contact me through [email](mailto:andresmanglano@pm.me).
