@@ -1,5 +1,5 @@
 +++
-title = 'neodb-companion'
+title = 'Neodb Companion'
 date = 2025-04-29T16:08:26+01:00
 draft = false
 tags = ['project', 'neodb', 'kotlin']
